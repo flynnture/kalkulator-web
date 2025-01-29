@@ -117,7 +117,7 @@
                 <button onclick="appendValue('7')">7</button>
                 <button onclick="appendValue('8')">8</button>
                 <button onclick="appendValue('9')">9</button>
-                <button onclick="appendValue('%')">%</button> <!-- Tombol Bintang diganti dengan Persen -->
+                <button onclick="appendValue('×')">×</button> <!-- Diubah dari % menjadi × -->
             </div>
             <div class="buttons">
                 <button onclick="appendValue('4')">4</button>
@@ -155,7 +155,11 @@
         function calculateResult() {
             const display = document.getElementById('display');
             try {
-                display.value = eval(display.value.replace('÷', '/').replace('%', '/100'));
+                // Mengubah simbol ÷ dan × ke operator yang benar
+                let expression = display.value
+                    .replace(/÷/g, '/')
+                    .replace(/×/g, '*');
+                display.value = eval(expression);
             } catch (error) {
                 display.value = 'Error';
             }
@@ -169,9 +173,11 @@
         function toggleSign() {
             const display = document.getElementById('display');
             if (display.value) {
-                display.value = display.value.startsWith('-') ? display.value.slice(1) : '-' + display.value;
+                display.value = display.value.startsWith('-') ? 
+                    display.value.slice(1) : 
+                    '-' + display.value;
             }
         }
     </script>
 </body>
-    </html>
+</html>
